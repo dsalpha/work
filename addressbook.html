@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+         h1{
+        font-family: verdana;
+        color: #006666;
+        text-align: center; 
+    }
+    body {
+        background-color: #F8F8FA;
+    }
+    </style>
+</head>
+<body>
+    <h1>ADDRESS BOOK</h1><br>
+    <form action="" target="_blank" method="get">
+    <label for="name">Name </label>
+    <input type="text" id="name" name="name" pattern="^[a-zA-Z ]*$" placeholder="Enter the name" required><br><br>
+    
+    <label>Type</label>
+    <input type="radio" name="type" id="type1" value="Temporary">
+    <label for="type1">Temporary </label>
+    <input type="radio" id="type2" name="type" value="Permanent">
+    <label for="type2">Permanent </label><br><br>
+    
+    <label>Address</label>
+	<textarea name="address" id="address" rows="10" cols="23" required>
+	</textarea><br><br>
+	
+	<label for="email">E-mail ID</label>
+    <input type="email" id="email" name="email" placeholder="abc@gmail.com" required><br><br>
+    
+    <label for="mobile">Mobile Number</label>
+    <input type="text" pattern="[9|8|7][0-9]{9}" id="mobile" name="mobile" placeholder="Enter the Mobile Number" required><br><br> 
+    
+    <label>Location</label>
+    <select name="location" id="location">
+	  <option id="Coimbatore" value="Coimbatore">Coimbatore</option>
+	  <option id="Chennai" value="Chennai">Chennai</option>
+      <option id="Bangalore" value="Bangalore">Bangalore</option>
+    </select><br><br>
+    
+    <input type="button" name="submit"  value="Book My Consignment" 
+    onclick="Add()">
+    
+    <input type="reset" name="clear" value="Reset">
+    
+    </form>
+    
+    <div id ="result" name="result"></div>
+    
+<script>
+var i=0;
+var flag = 0;
+var tabledata,button;
+var dataArray = new Array();
+function AddressRegister(Name,Type,Address,Email,Mobile,Location)
+{
+    this.Name = Name;
+    this.Type = Type;
+	this.Address = Address;
+	this.Email = Email;
+	this.Mobile = Mobile;
+	this.Location = Location;
+}
+
+function Add()
+{   
+    var Name=document.getElementById("name").value;
+    var Types=document.getElementsByName("type");
+    for(i = 0; i < Types.length; i++) { 
+        if(Types[i].checked) 
+        var Type = Types[i].value; 
+    }
+    
+    var Address=document.getElementById("address").value; 
+    var Email=document.getElementById("email").value;
+    var Mobile=document.getElementById("mobile").value;
+    var Location=document.getElementById("location").value;
+    var data = new AddressRegister(Name,Type,Address,Email,Mobile,Location);
+    dataArray.push(data);
+	displayAddress();
+}
+function displayAddress()
+{   
+    
+	if(flag==0)
+		{
+			tabledata = "<table style='position: fixed; background-color:lightgrey; border: 1px solid black; border-collapse: collapse;  margin-top: 25px;' border = '1'><tr><th>Name</th><th>Type</th><th>Address</th><th>Email</th><th>Mobile</th><th>Location</th></tr>";
+		}
+	
+		for(i=0;i<dataArray.length;i++)
+			{
+			    var tempname=dataArray[i].Name;
+			    var temptype=dataArray[i].Type;
+			    var tempaddress=dataArray[i].Address;
+			    var tempemail=dataArray[i].Email;
+			    var tempmobile=dataArray[i].Mobile;
+			    var templocation=dataArray[i].Location;
+			    
+				//Please fill the required code to store the values in tabledata.
+				
+				
+			}
+			tabledata+="<tr><td>"+tempname+"</td><td>"+temptype+"</td><td>"+tempaddress+"</td><td>"+tempemail+"</td><td>"+tempmobile+"</td><td>"+templocation+"</td></tr></table>";
+    //console.log(tabledata);
+	if(flag==0){   
+    //Please fill the required code to store the table data in result.
+	document.getElementById("result").innerHTML=tabledata;
+	document.getElementById("name").value = "";
+    
+    document.getElementsByName("type").checked = false;
+	
+    document.getElementById("address").value = "";
+	
+    document.getElementById("email").value ="";
+    
+    document.getElementById("mobile").value ="";
+	
+    document.getElementById("location").value = "";
+	}
+	count=0;
+    }
+
+</script>
+</body>
+</html>
