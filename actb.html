@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <style>
+    body {
+        background-color: #EED426;
+    }
+    h1{
+        font-family: verdana;
+        color: #006666;
+        text-align: center; 
+    }
+    
+    table, th, td {
+                    border: 1px solid black;
+                  }
+    #rentalcost{
+             float: right;
+           }
+</style>
+    </head>
+<body>
+
+<h1>ACTB Connection Portal</h1><br>
+
+<form method="get">
+  <label for="custname">Customer Name </label>
+  <input type="text" id="custname" name="custname" placeholder="Enter the customer name" pattern="[A-Z]{1,}" 
+  title="Uppercase Only" required><br><br>
+  
+  <label for="email">Customer Email	 </label>
+  <input type="email" id="email" name="email" placeholder="abc@gmail.com" required><br><br>
+  
+  <label for="mobileNo">Mobile Number</label>
+  <input type="text" pattern="[9|8|7][0-9]{9}" id="mobile" name="mobile" placeholder="Enter the Mobile Number" required><br><br>  
+  
+  <label>Connection Type</label>
+    <select name="conntype" id="testConnectiontype">
+	  <option id="Pre" value="Pre">Pre</option>
+	  <option id="Post" value="Post">Post</option>
+    </select><br><br>
+  
+  <label> Scheme Name</label>
+  <input type="radio" id="scheme1" name="scheme" value="Local" >
+  <label for="scheme">Local</label>
+  <input type="radio" id="scheme2" name="scheme" value="STD" >
+  <label for="scheme">STD </label>
+  <input type="radio" id="scheme3" name="scheme" value="FullTalkTime">
+  <label for="scheme">FullTalkTime</label><br><br>
+  
+  <label for="duration">Connection Duration </label>
+  <input type="number" id="duration" name="duration" min="1" max="12" title="Range is from 1 to 12 months"><br><br>
+  
+ <input type="button" name="submit"  value="Connection Bill Amount" onclick="connectionBillAmount()">
+ <input type="reset" name="clear" value="Reset">
+
+</form>
+<div id = "result" name="result" ></div>
+
+<table id="rentalcost">
+	<caption>Rental Cost Table</caption>
+  <tr>
+    <th>Connection Type</th>
+    <th>Call Limit</th>
+    <th>Monthly Rental</th>
+  </tr>
+  <tr align="center">
+    <td>Pre</td>
+    <td>500</td>
+    <td>75</td>
+  </tr>
+  <tr align="center">
+    <td>Post</td>
+    <td>Unlimited</td>
+    <td>150</td>
+  </tr>
+</table>
+
+
+<script>
+
+function connectionBillAmount()
+{
+		var costpermonth;
+        var monthlyRental;
+        var duration  = document.getElementById("duration").value;
+        
+       
+        
+        var sch = document.getElementsByName("scheme");
+        for(var i=0;i<sch.length;i++){
+        if(sch[i].checked){
+        switch(i) {
+        case 0: costpermonth=200; break;
+        case 1: costpermonth=350; break;
+        case 2: costpermonth=500; break;
+        			}
+        				}        
+        							}
+        
+        var selection = document.getElementById("testConnectiontype").value;
+		if(selection==="Pre")monthlyRental=75;
+		else monthlyRental=150;
+		var total = (duration * costpermonth) + monthlyRental;
+        document.getElementById("result").innerHTML="The Total Monthly Rental Cost is Rs. "+total; 
+}
+
+</script>
+</body>
+</html>
+
+
